@@ -36,7 +36,7 @@ import com.ebates.restaurants.poc.MainContract
 import poc.ebates.com.restaurants.R
 import com.ebates.restaurants.poc.entity.MainEntity
 import com.ebates.restaurants.poc.presenter.MainPresenter
-import com.ebates.restaurants.poc.view.adapters.JokesListAdapter
+import com.ebates.restaurants.poc.view.adapters.MainListAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar_view_custom_layout.*
 import org.jetbrains.anko.toast
@@ -81,7 +81,7 @@ class MainActivity : BaseActivity(), MainContract.View {
 
     presenter = MainPresenter(this)
     recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-    recyclerView.adapter = JokesListAdapter({ joke -> presenter?.listItemClicked(joke) }, null)
+    recyclerView.adapter = MainListAdapter({ joke -> presenter?.listItemClicked(joke) }, null)
   }
 
   override fun onResume() {
@@ -114,7 +114,7 @@ class MainActivity : BaseActivity(), MainContract.View {
   }
 
   override fun publishDataList(data: List<MainEntity>) {
-    (recyclerView.adapter as JokesListAdapter).updateData(data)
+    (recyclerView.adapter as MainListAdapter).updateData(data)
   }
 
   override fun showInfoMessage(msg: String) {
