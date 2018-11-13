@@ -72,8 +72,8 @@ class MainActivity : BaseActivity(), MainContract.View {
 
   private var presenter: MainContract.Presenter? = null
   private val toolbar: Toolbar by lazy { toolbar_toolbar_view }
-  private val recyclerView: RecyclerView by lazy { rv_jokes_list_activity_main }
-  private val progressBar: ProgressBar by lazy { prog_bar_loading_jokes_activity_main }
+  private val recyclerView: RecyclerView by lazy { rv_data_list_activity_main }
+  private val progressBar: ProgressBar by lazy { prog_bar_loading_data_activity_main }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -81,7 +81,7 @@ class MainActivity : BaseActivity(), MainContract.View {
 
     presenter = MainPresenter(this)
     recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-    recyclerView.adapter = MainListAdapter({ joke -> presenter?.listItemClicked(joke) }, null)
+    recyclerView.adapter = MainListAdapter({ data -> presenter?.listItemClicked(data) }, null)
   }
 
   override fun onResume() {

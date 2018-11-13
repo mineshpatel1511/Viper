@@ -45,8 +45,8 @@ class DetailPresenter(private var view: DetailContract.View?) : DetailContract.P
     router?.exit()
   }
 
-  override fun onViewCreated(joke: MainEntity) {
-    view?.showJokeData(joke.id.toString(), joke.text)
+  override fun onViewCreated(data: MainEntity) {
+    view?.showData(data.id.toString(), data.text)
   }
 
   override fun onDestroy() {

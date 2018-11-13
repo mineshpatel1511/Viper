@@ -14,7 +14,7 @@
     app:layout_constraintTop_toTopOf="parent" />
 
   <android.support.v7.widget.RecyclerView
-    android:id="@+id/rv_jokes_list_activity_main"
+    android:id="@+id/rv_data_list_activity_main"
     android:layout_width="@dimen/dimen_fully_stretchable"
     android:layout_height="@dimen/dimen_fully_stretchable"
     android:layout_marginTop="@dimen/standard_margin"
@@ -24,7 +24,7 @@
     app:layout_constraintTop_toBottomOf="@+id/toolbar_view" />
 
   <ProgressBar
-    android:id="@+id/prog_bar_loading_jokes_activity_main"
+    android:id="@+id/prog_bar_loading_data_activity_main"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:visibility="gone"

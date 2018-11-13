@@ -45,7 +45,7 @@ class MainInteractor : MainContract.Interactor {
     val icndbUrl = "https://api.icndb.com/jokes"
   }
 
-  override fun loadJokesList(interactorOutput: (result: Result<Json, FuelError>) -> Unit) {
+  override fun loadDataList(interactorOutput: (result: Result<Json, FuelError>) -> Unit) {
     icndbUrl.httpPost().responseJson { _, _, result ->
       interactorOutput(result)
     }

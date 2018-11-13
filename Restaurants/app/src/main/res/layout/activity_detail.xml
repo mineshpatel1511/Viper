@@ -31,7 +31,7 @@
       android:orientation="vertical">
 
       <TextView
-        android:id="@+id/tv_joke_id_activity_detail"
+        android:id="@+id/tv_data_id_activity_detail"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/dimen_fully_stretchable"
         android:layout_marginBottom="@dimen/standard_margin"
@@ -47,7 +47,7 @@
         tools:text="ID" />
 
       <TextView
-        android:id="@+id/tv_joke_activity_detail"
+        android:id="@+id/tv_data_activity_detail"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_fully_stretchable"
         android:layout_marginEnd="@dimen/standard_margin"

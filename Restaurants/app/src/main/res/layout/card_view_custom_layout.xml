@@ -28,7 +28,7 @@
       tools:text="Hello World!" />
 
     <TextView
-      android:id="@+id/tv_joke_card_view_custom_layout"
+      android:id="@+id/tv_data_card_view_custom_layout"
       android:layout_width="@dimen/dimen_fully_stretchable"
       android:layout_height="wrap_content"
       android:layout_marginBottom="@dimen/standard_margin"

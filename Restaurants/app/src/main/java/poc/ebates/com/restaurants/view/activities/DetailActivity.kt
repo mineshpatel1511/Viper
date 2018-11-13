@@ -60,8 +60,8 @@ class DetailActivity : BaseActivity(), DetailContract.View {
 
   private var presenter: DetailContract.Presenter? = null
   private val toolbar: Toolbar by lazy { toolbar_toolbar_view }
-  private val tvId: TextView? by lazy { tv_joke_id_activity_detail }
-  private val tvJoke: TextView? by lazy { tv_joke_activity_detail }
+  private val tvId: TextView? by lazy { tv_data_id_activity_detail }
+  private val tvData: TextView? by lazy { tv_data_activity_detail }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -106,9 +106,9 @@ class DetailActivity : BaseActivity(), DetailContract.View {
 
   override fun getToolbarInstance(): android.support.v7.widget.Toolbar? = toolbar
 
-  override fun showJokeData(id: String, joke: String) {
+  override fun showData(id: String, data: String) {
     tvId?.text = id
-    tvJoke?.text = joke
+    tvData?.text = data
   }
 
   override fun showInfoMessage(msg: String) {

@@ -37,7 +37,7 @@ interface MainContract {
 
   interface Presenter {
     // User actions
-    fun listItemClicked(joke: MainEntity?)
+    fun listItemClicked(data: MainEntity?)
 
     // Model updates
     fun onViewCreated()
@@ -46,7 +46,7 @@ interface MainContract {
   }
 
   interface Interactor {
-    fun loadJokesList(interactorOutput: (result: Result<Json, FuelError>) -> Unit)
+    fun loadDataList(interactorOutput: (result: Result<Json, FuelError>) -> Unit)
   }
 
   interface InteractorOutput {

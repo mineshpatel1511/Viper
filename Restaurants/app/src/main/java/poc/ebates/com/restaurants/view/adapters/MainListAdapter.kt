@@ -39,7 +39,7 @@ class MainListAdapter(private var listener: (MainEntity?) -> Unit, private var d
   // Creating card_view_custom_layout ViewHolder to speed up the performance
   inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val tvId: TextView? = itemView.tv_id_card_view_custom_layout
-    val tvJoke: TextView? = itemView.tv_joke_card_view_custom_layout
+    val tvData: TextView? = itemView.tv_data_card_view_custom_layout
   }
 
   override fun getItemCount() = dataList?.size ?: 0
@@ -52,7 +52,7 @@ class MainListAdapter(private var listener: (MainEntity?) -> Unit, private var d
 
   override fun onBindViewHolder(holder: ViewHolder, position: Int) {
     holder.tvId?.text = dataList?.let { it[position].id.toString() }
-    holder.tvJoke?.text = dataList?.let { Html.fromHtml(it[position].text) }
+    holder.tvData?.text = dataList?.let { Html.fromHtml(it[position].text) }
     holder.itemView?.setOnClickListener { listener(dataList?.get(position)) }
   }
 

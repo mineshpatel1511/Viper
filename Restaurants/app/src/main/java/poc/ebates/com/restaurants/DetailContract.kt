@@ -26,7 +26,7 @@ import com.ebates.restaurants.poc.entity.MainEntity
 
 interface DetailContract {
   interface View {
-    fun showJokeData(id: String, joke: String)
+    fun showData(id: String, data: String)
     fun showInfoMessage(msg: String)
   }
 
@@ -35,7 +35,7 @@ interface DetailContract {
     fun backButtonClicked()
 
     // Model updates
-    fun onViewCreated(joke: MainEntity)
+    fun onViewCreated(data: MainEntity)
 
     fun onDestroy()
   }

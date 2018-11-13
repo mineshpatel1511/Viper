@@ -47,25 +47,25 @@ class MainPresenter(private var view: MainContract.View?) : MainContract.Present
   private var interactor: MainContract.Interactor? = MainInteractor()
   private val router: Router? by lazy { BaseApplication.INSTANCE.cicerone.router }
 
-  override fun listItemClicked(joke: MainEntity?) {
-    router?.navigateTo(DetailActivity.TAG, joke)
+  override fun listItemClicked(data: MainEntity?) {
+    router?.navigateTo(DetailActivity.TAG, data)
   }
 
   override fun onViewCreated() {
     view?.showLoading()
-    interactor?.loadJokesList { result ->
+    interactor?.loadDataList { result ->
       when (result) {
         is Result.Failure -> {
           this.onQueryError()
         }
         is Result.Success -> {
-          val jokesJsonObject = result.get().obj()
+          val dataJsonObject = result.get().obj()
 
           val type = object : TypeToken<List<MainEntity>>() {}.type
-          val jokesList: List<MainEntity> =
-              Gson().fromJson(jokesJsonObject.getJSONArray("value").toString(), type)
+          val dataList: List<MainEntity> =
+              Gson().fromJson(dataJsonObject.getJSONArray("value").toString(), type)
 
-          this.onQuerySuccess(jokesList)
+          this.onQuerySuccess(dataList)
         }
       }
     }
