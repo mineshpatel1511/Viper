@@ -5,13 +5,11 @@ import com.github.kittinunf.result.Result
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.ebates.restaurants.poc.BaseApplication
-import com.ebates.restaurants.poc.DetailContract
 import com.ebates.restaurants.poc.MainContract
 import com.ebates.restaurants.poc.entity.JokeEntity
-import com.ebates.restaurants.poc.interactor.FeatureFlagInteractor
 import com.ebates.restaurants.poc.interactor.JokeListInteractor
 import com.ebates.restaurants.poc.view.activities.DetailActivity
-import poc.ebates.com.restaurants.viewInterface.JokeRecyclerViewInterface
+import poc.ebates.com.restaurants.commonViewInterfaces.JokeRecyclerViewInterface
 import ru.terrakok.cicerone.Router
 
 

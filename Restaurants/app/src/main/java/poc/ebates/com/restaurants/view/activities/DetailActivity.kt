@@ -39,7 +39,7 @@ import com.ebates.restaurants.poc.view.adapters.MainListAdapter
 import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.toolbar_view_custom_layout.*
 import org.jetbrains.anko.toast
-import poc.ebates.com.restaurants.viewInterface.JokeRecyclerViewInterface
+import poc.ebates.com.restaurants.commonViewInterfaces.JokeRecyclerViewInterface
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.commands.Back
 import ru.terrakok.cicerone.commands.Command

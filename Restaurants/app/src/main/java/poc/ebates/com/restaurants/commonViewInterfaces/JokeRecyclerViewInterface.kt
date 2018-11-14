@@ -1,4 +1,4 @@
-package poc.ebates.com.restaurants.viewInterface
+package poc.ebates.com.restaurants.commonViewInterfaces
 
 import com.ebates.restaurants.poc.entity.JokeEntity
 
