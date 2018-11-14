@@ -82,7 +82,7 @@ class MainActivity : BaseActivity(), JokeRecyclerViewInterface {
 
     presenter = MainPresenter(this)
     recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-    recyclerView.adapter = MainListAdapter({ data -> presenter?.listItemClicked(data) }, null)
+    recyclerView.adapter = MainListAdapter({ data -> presenter?.listItemClicked(data) }, null, false)
   }
 
   override fun onResume() {

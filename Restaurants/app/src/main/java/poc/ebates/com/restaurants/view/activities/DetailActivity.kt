@@ -77,7 +77,7 @@ class DetailActivity : BaseActivity(), DetailContract.View, JokeRecyclerViewInte
 
     presenter = DetailPresenter(this)
       recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-      recyclerView.adapter = MainListAdapter(null, null)
+      recyclerView.adapter = MainListAdapter(null, null, false)
   }
 
   override fun onResume() {

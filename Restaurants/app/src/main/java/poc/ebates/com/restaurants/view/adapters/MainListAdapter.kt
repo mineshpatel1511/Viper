@@ -27,6 +27,7 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 
 import poc.ebates.com.restaurants.R
@@ -34,12 +35,13 @@ import com.ebates.restaurants.poc.entity.JokeEntity
 
 import kotlinx.android.synthetic.main.card_view_custom_layout.view.*
 
-class MainListAdapter(private var listener: ((JokeEntity?) -> Unit)?, private var dataList: List<JokeEntity>?) : RecyclerView.Adapter<MainListAdapter.ViewHolder>() {
+class MainListAdapter(private var listener: ((JokeEntity?) -> Unit)?, private var dataList: List<JokeEntity>?, private var showLaughButton: Boolean) : RecyclerView.Adapter<MainListAdapter.ViewHolder>() {
 
   // Creating card_view_custom_layout ViewHolder to speed up the performance
   inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val tvId: TextView? = itemView.tv_id_card_view_custom_layout
     val tvData: TextView? = itemView.tv_data_card_view_custom_layout
+    val btnLaugh: Button? = itemView.btn_laugh
   }
 
   override fun getItemCount() = dataList?.size ?: 0
@@ -54,6 +56,7 @@ class MainListAdapter(private var listener: ((JokeEntity?) -> Unit)?, private va
     holder.tvId?.text = dataList?.let { it[position].id.toString() }
     holder.tvData?.text = dataList?.let { Html.fromHtml(it[position].text) }
     holder.itemView?.setOnClickListener { listener?.invoke(dataList?.get(position)) }
+    holder.btnLaugh?.visibility = if (showLaughButton) View.VISIBLE else View.GONE
   }
 
   fun updateData(list: List<JokeEntity>) {
