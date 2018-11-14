@@ -34,17 +34,18 @@ import android.widget.ProgressBar
 import com.ebates.restaurants.poc.BaseApplication
 import com.ebates.restaurants.poc.MainContract
 import poc.ebates.com.restaurants.R
-import com.ebates.restaurants.poc.entity.MainEntity
+import com.ebates.restaurants.poc.entity.JokeEntity
 import com.ebates.restaurants.poc.presenter.MainPresenter
 import com.ebates.restaurants.poc.view.adapters.MainListAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar_view_custom_layout.*
 import org.jetbrains.anko.toast
+import poc.ebates.com.restaurants.viewInterface.JokeRecyclerViewInterface
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.commands.Command
 import ru.terrakok.cicerone.commands.Forward
 
-class MainActivity : BaseActivity(), MainContract.View {
+class MainActivity : BaseActivity(), JokeRecyclerViewInterface {
 
   companion object {
     val TAG: String = "MainActivity"
@@ -59,7 +60,7 @@ class MainActivity : BaseActivity(), MainContract.View {
       }
 
       private fun forward(command: Forward) {
-        val data = (command.transitionData as MainEntity)
+        val data = (command.transitionData as JokeEntity)
 
         when (command.screenKey) {
           DetailActivity.TAG -> startActivity(Intent(this@MainActivity, DetailActivity::class.java)
@@ -113,7 +114,7 @@ class MainActivity : BaseActivity(), MainContract.View {
     progressBar.visibility = View.GONE
   }
 
-  override fun publishDataList(data: List<MainEntity>) {
+  override fun publishDataList(data: List<JokeEntity>) {
     (recyclerView.adapter as MainListAdapter).updateData(data)
   }
 

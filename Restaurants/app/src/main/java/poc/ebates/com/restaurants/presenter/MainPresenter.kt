@@ -5,18 +5,19 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.ebates.restaurants.poc.BaseApplication
 import com.ebates.restaurants.poc.MainContract
-import com.ebates.restaurants.poc.entity.MainEntity
-import com.ebates.restaurants.poc.interactor.MainInteractor
+import com.ebates.restaurants.poc.entity.JokeEntity
+import com.ebates.restaurants.poc.interactor.JokeListInteractor
 import com.ebates.restaurants.poc.view.activities.DetailActivity
+import poc.ebates.com.restaurants.viewInterface.JokeRecyclerViewInterface
 import ru.terrakok.cicerone.Router
 
 
-class MainPresenter(private var view: MainContract.View?) : MainContract.Presenter, MainContract.InteractorOutput {
+class MainPresenter(private var view: JokeRecyclerViewInterface?) : MainContract.Presenter, MainContract.InteractorOutput {
 
-  private var interactor: MainContract.Interactor? = MainInteractor()
+  private var interactor: MainContract.Interactor? = JokeListInteractor()
   private val router: Router? by lazy { BaseApplication.INSTANCE.cicerone.router }
 
-  override fun listItemClicked(data: MainEntity?) {
+  override fun listItemClicked(data: JokeEntity?) {
     router?.navigateTo(DetailActivity.TAG, data)
   }
 
@@ -30,8 +31,8 @@ class MainPresenter(private var view: MainContract.View?) : MainContract.Present
         is Result.Success -> {
           val dataJsonObject = result.get().obj()
 
-          val type = object : TypeToken<List<MainEntity>>() {}.type
-          val dataList: List<MainEntity> =
+          val type = object : TypeToken<List<JokeEntity>>() {}.type
+          val dataList: List<JokeEntity> =
               Gson().fromJson(dataJsonObject.getJSONArray("value").toString(), type)
 
           this.onQuerySuccess(dataList)
@@ -40,7 +41,7 @@ class MainPresenter(private var view: MainContract.View?) : MainContract.Present
     }
   }
 
-  override fun onQuerySuccess(data: List<MainEntity>) {
+  override fun onQuerySuccess(data: List<JokeEntity>) {
     view?.hideLoading()
     view?.publishDataList(data)
   }

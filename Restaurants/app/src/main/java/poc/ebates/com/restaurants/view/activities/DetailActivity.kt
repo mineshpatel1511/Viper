@@ -33,18 +33,18 @@ import android.widget.TextView
 import com.ebates.restaurants.poc.BaseApplication
 import com.ebates.restaurants.poc.DetailContract
 import poc.ebates.com.restaurants.R
-import com.ebates.restaurants.poc.entity.MainEntity
+import com.ebates.restaurants.poc.entity.JokeEntity
 import com.ebates.restaurants.poc.presenter.DetailPresenter
 import com.ebates.restaurants.poc.view.adapters.MainListAdapter
 import kotlinx.android.synthetic.main.activity_detail.*
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar_view_custom_layout.*
 import org.jetbrains.anko.toast
+import poc.ebates.com.restaurants.viewInterface.JokeRecyclerViewInterface
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.commands.Back
 import ru.terrakok.cicerone.commands.Command
 
-class DetailActivity : BaseActivity(), DetailContract.View {
+class DetailActivity : BaseActivity(), DetailContract.View, JokeRecyclerViewInterface {
 
   companion object {
     val TAG = "DetailActivity"
@@ -87,7 +87,7 @@ class DetailActivity : BaseActivity(), DetailContract.View {
       supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
     // load invoking arguments
-    val argument = intent.getParcelableExtra<MainEntity>("data")
+    val argument = intent.getParcelableExtra<JokeEntity>("data")
     argument?.let { presenter?.onViewCreated(it) }
 
     BaseApplication.INSTANCE.cicerone.navigatorHolder.setNavigator(navigator)
@@ -131,7 +131,7 @@ class DetailActivity : BaseActivity(), DetailContract.View {
     progressBar.visibility = View.GONE
   }
 
-  override fun publishDataList(data: List<MainEntity>) {
+  override fun publishDataList(data: List<JokeEntity>) {
     (recyclerView.adapter as MainListAdapter).updateData(data)
   }
 

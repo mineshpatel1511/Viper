@@ -31,6 +31,7 @@
 
 package com.ebates.restaurants.poc.interactor
 
+import com.ebates.restaurants.poc.DetailContract
 import com.github.kittinunf.fuel.android.core.Json
 import com.github.kittinunf.fuel.android.extension.responseJson
 import com.github.kittinunf.fuel.core.FuelError
@@ -39,7 +40,7 @@ import com.github.kittinunf.result.Result
 import com.ebates.restaurants.poc.MainContract
 
 
-class MainInteractor : MainContract.Interactor {
+class JokeListInteractor : MainContract.Interactor, DetailContract.Interactor {
 
   companion object {
     val icndbUrl = "https://api.icndb.com/jokes"

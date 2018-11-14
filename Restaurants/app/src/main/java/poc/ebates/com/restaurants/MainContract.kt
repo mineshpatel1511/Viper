@@ -25,19 +25,13 @@ package com.ebates.restaurants.poc
 import com.github.kittinunf.fuel.android.core.Json
 import com.github.kittinunf.fuel.core.FuelError
 import com.github.kittinunf.result.Result
-import com.ebates.restaurants.poc.entity.MainEntity
+import com.ebates.restaurants.poc.entity.JokeEntity
 
 interface MainContract {
-  interface View {
-    fun showLoading()
-    fun hideLoading()
-    fun publishDataList(data: List<MainEntity>)
-    fun showInfoMessage(msg: String)
-  }
 
   interface Presenter {
     // User actions
-    fun listItemClicked(data: MainEntity?)
+    fun listItemClicked(data: JokeEntity?)
 
     // Model updates
     fun onViewCreated()
@@ -50,7 +44,7 @@ interface MainContract {
   }
 
   interface InteractorOutput {
-    fun onQuerySuccess(data: List<MainEntity>)
+    fun onQuerySuccess(data: List<JokeEntity>)
     fun onQueryError()
   }
 }

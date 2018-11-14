@@ -30,11 +30,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 
 import poc.ebates.com.restaurants.R
-import com.ebates.restaurants.poc.entity.MainEntity
+import com.ebates.restaurants.poc.entity.JokeEntity
 
 import kotlinx.android.synthetic.main.card_view_custom_layout.view.*
 
-class MainListAdapter(private var listener: ((MainEntity?) -> Unit)?, private var dataList: List<MainEntity>?) : RecyclerView.Adapter<MainListAdapter.ViewHolder>() {
+class MainListAdapter(private var listener: ((JokeEntity?) -> Unit)?, private var dataList: List<JokeEntity>?) : RecyclerView.Adapter<MainListAdapter.ViewHolder>() {
 
   // Creating card_view_custom_layout ViewHolder to speed up the performance
   inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -56,7 +56,7 @@ class MainListAdapter(private var listener: ((MainEntity?) -> Unit)?, private va
     holder.itemView?.setOnClickListener { listener?.invoke(dataList?.get(position)) }
   }
 
-  fun updateData(list: List<MainEntity>) {
+  fun updateData(list: List<JokeEntity>) {
     this.dataList = list
     this.notifyDataSetChanged()
   }

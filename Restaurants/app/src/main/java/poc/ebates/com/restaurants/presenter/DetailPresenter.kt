@@ -33,24 +33,25 @@ package com.ebates.restaurants.poc.presenter
 
 import com.ebates.restaurants.poc.BaseApplication
 import com.ebates.restaurants.poc.DetailContract
-import com.ebates.restaurants.poc.entity.MainEntity
-import com.ebates.restaurants.poc.interactor.DetailInteractor
+import com.ebates.restaurants.poc.entity.JokeEntity
+import com.ebates.restaurants.poc.interactor.JokeListInteractor
+import com.ebates.restaurants.poc.view.activities.DetailActivity
 import com.github.kittinunf.result.Result
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import ru.terrakok.cicerone.Router
 
 
-class DetailPresenter(private var view: DetailContract.View?) : DetailContract.Presenter, DetailContract.InteractorOutput {
+class DetailPresenter(private var view: DetailActivity?) : DetailContract.Presenter, DetailContract.InteractorOutput {
 
-  private var interactor: DetailContract.Interactor? = DetailInteractor()
+  private var interactor: DetailContract.Interactor? = JokeListInteractor()
   private val router: Router? by lazy { BaseApplication.INSTANCE.cicerone.router }
 
   override fun backButtonClicked() {
     router?.exit()
   }
 
-  override fun onViewCreated(data: MainEntity) {
+  override fun onViewCreated(data: JokeEntity) {
     view?.showData(data.id.toString(), data.text)
 
     view?.showLoading()
@@ -62,8 +63,8 @@ class DetailPresenter(private var view: DetailContract.View?) : DetailContract.P
         is Result.Success -> {
           val dataJsonObject = result.get().obj()
 
-          val type = object : TypeToken<List<MainEntity>>() {}.type
-          val dataList: List<MainEntity> =
+          val type = object : TypeToken<List<JokeEntity>>() {}.type
+          val dataList: List<JokeEntity> =
                   Gson().fromJson(dataJsonObject.getJSONArray("value").toString(), type)
 
           this.onQuerySuccess(dataList)
@@ -76,7 +77,7 @@ class DetailPresenter(private var view: DetailContract.View?) : DetailContract.P
     view = null
   }
 
-  override fun onQuerySuccess(data: List<MainEntity>) {
+  override fun onQuerySuccess(data: List<JokeEntity>) {
     view?.hideLoading()
     view?.publishDataList(data)
   }

@@ -22,7 +22,7 @@
 
 package com.ebates.restaurants.poc
 
-import com.ebates.restaurants.poc.entity.MainEntity
+import com.ebates.restaurants.poc.entity.JokeEntity
 import com.github.kittinunf.fuel.android.core.Json
 import com.github.kittinunf.fuel.core.FuelError
 import com.github.kittinunf.result.Result
@@ -30,10 +30,6 @@ import com.github.kittinunf.result.Result
 interface DetailContract {
   interface View {
     fun showData(id: String, data: String)
-    fun showLoading()
-    fun hideLoading()
-    fun publishDataList(data: List<MainEntity>)
-    fun showInfoMessage(msg: String)
   }
 
   interface Presenter {
@@ -41,7 +37,7 @@ interface DetailContract {
     fun backButtonClicked()
 
     // Model updates
-    fun onViewCreated(data: MainEntity)
+    fun onViewCreated(data: JokeEntity)
 
     fun onDestroy()
   }
@@ -51,7 +47,7 @@ interface DetailContract {
   }
 
   interface InteractorOutput {
-    fun onQuerySuccess(data: List<MainEntity>)
+    fun onQuerySuccess(data: List<JokeEntity>)
     fun onQueryError()
   }
 }
