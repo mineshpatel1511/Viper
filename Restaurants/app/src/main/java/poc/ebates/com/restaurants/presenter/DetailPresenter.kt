@@ -31,9 +31,11 @@
 
 package com.ebates.restaurants.poc.presenter
 
+import cache.FeatureFlagManager
 import com.ebates.restaurants.poc.BaseApplication
 import com.ebates.restaurants.poc.DetailContract
 import com.ebates.restaurants.poc.entity.JokeEntity
+import com.ebates.restaurants.poc.interactor.FeatureFlagInteractor
 import com.ebates.restaurants.poc.interactor.JokeListInteractor
 import com.ebates.restaurants.poc.view.activities.DetailActivity
 import com.github.kittinunf.result.Result
@@ -45,6 +47,7 @@ import ru.terrakok.cicerone.Router
 class DetailPresenter(private var view: DetailActivity?) : DetailContract.Presenter, DetailContract.InteractorOutput {
 
   private var interactor: DetailContract.Interactor? = JokeListInteractor()
+    private var featureFlagInteractor: DetailContract.ApiInteractor? = FeatureFlagInteractor()
   private val router: Router? by lazy { BaseApplication.INSTANCE.cicerone.router }
 
   override fun backButtonClicked() {
@@ -71,6 +74,8 @@ class DetailPresenter(private var view: DetailActivity?) : DetailContract.Presen
         }
       }
     }
+
+    featureFlagInteractor?.loadFeatureFlag(this)
   }
 
   override fun onDestroy() {
@@ -86,4 +91,14 @@ class DetailPresenter(private var view: DetailActivity?) : DetailContract.Presen
     view?.hideLoading()
     view?.showInfoMessage("Error when loading data")
   }
+
+    override fun onFeatureFlagSuccess(showLaughButton: Boolean) {
+        FeatureFlagManager.instance.setLaughButtonEnabled(showLaughButton)
+
+        view?.updateShowLaughButton(showLaughButton)
+        view?.refreshView()
+    }
+
+    override fun onFeatureFlagFailure() {
+    }
 }

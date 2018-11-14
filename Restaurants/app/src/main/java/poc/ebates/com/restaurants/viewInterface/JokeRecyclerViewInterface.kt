@@ -7,4 +7,6 @@ interface JokeRecyclerViewInterface {
     fun hideLoading()
     fun publishDataList(data: List<JokeEntity>)
     fun showInfoMessage(msg: String)
+    fun updateShowLaughButton(showLaughButton: Boolean)
+    fun refreshView()
 }

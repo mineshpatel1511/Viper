@@ -82,7 +82,7 @@ class MainActivity : BaseActivity(), JokeRecyclerViewInterface {
 
     presenter = MainPresenter(this)
     recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-    recyclerView.adapter = MainListAdapter({ data -> presenter?.listItemClicked(data) }, null, false)
+    recyclerView.adapter = MainListAdapter({ data -> presenter?.listItemClicked(data) }, null)
   }
 
   override fun onResume() {
@@ -103,6 +103,15 @@ class MainActivity : BaseActivity(), JokeRecyclerViewInterface {
   }
 
   override fun getToolbarInstance(): Toolbar? = toolbar
+
+  override fun updateShowLaughButton(showLaughButton: Boolean) {
+    val adapter = recyclerView.adapter as? MainListAdapter
+    adapter?.updateShowLaughButton(showLaughButton)
+  }
+
+  override fun refreshView() {
+    recyclerView.adapter?.notifyDataSetChanged()
+  }
 
   override fun showLoading() {
     recyclerView.isEnabled = false

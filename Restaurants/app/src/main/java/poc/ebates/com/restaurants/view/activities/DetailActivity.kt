@@ -77,7 +77,7 @@ class DetailActivity : BaseActivity(), DetailContract.View, JokeRecyclerViewInte
 
     presenter = DetailPresenter(this)
       recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-      recyclerView.adapter = MainListAdapter(null, null, false)
+      recyclerView.adapter = MainListAdapter(null, null)
   }
 
   override fun onResume() {
@@ -112,6 +112,15 @@ class DetailActivity : BaseActivity(), DetailContract.View, JokeRecyclerViewInte
     presenter?.onDestroy()
     presenter = null
     super.onDestroy()
+  }
+
+  override fun updateShowLaughButton(showLaughButton: Boolean) {
+    val adapter = recyclerView.adapter as? MainListAdapter
+    adapter?.updateShowLaughButton(showLaughButton)
+  }
+
+  override fun refreshView() {
+    recyclerView.adapter?.notifyDataSetChanged()
   }
 
   override fun getToolbarInstance(): android.support.v7.widget.Toolbar? = toolbar

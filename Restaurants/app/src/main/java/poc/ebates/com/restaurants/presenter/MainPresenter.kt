@@ -1,11 +1,14 @@
 package com.ebates.restaurants.poc.presenter
 
+import cache.FeatureFlagManager
 import com.github.kittinunf.result.Result
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.ebates.restaurants.poc.BaseApplication
+import com.ebates.restaurants.poc.DetailContract
 import com.ebates.restaurants.poc.MainContract
 import com.ebates.restaurants.poc.entity.JokeEntity
+import com.ebates.restaurants.poc.interactor.FeatureFlagInteractor
 import com.ebates.restaurants.poc.interactor.JokeListInteractor
 import com.ebates.restaurants.poc.view.activities.DetailActivity
 import poc.ebates.com.restaurants.viewInterface.JokeRecyclerViewInterface
@@ -54,5 +57,15 @@ class MainPresenter(private var view: JokeRecyclerViewInterface?) : MainContract
   override fun onDestroy() {
     view = null
     interactor = null
+  }
+
+  override fun onFeatureFlagSuccess(showLaughButton: Boolean) {
+    FeatureFlagManager.instance.setLaughButtonEnabled(showLaughButton)
+
+    view?.updateShowLaughButton(showLaughButton)
+    view?.refreshView()
+  }
+
+  override fun onFeatureFlagFailure() {
   }
 }

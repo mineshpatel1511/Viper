@@ -43,8 +43,14 @@ interface MainContract {
     fun loadDataList(interactorOutput: (result: Result<Json, FuelError>) -> Unit)
   }
 
+  interface ApiInteractor {
+    fun loadFeatureFlag(interactorOutput: InteractorOutput)
+  }
+
   interface InteractorOutput {
     fun onQuerySuccess(data: List<JokeEntity>)
     fun onQueryError()
+    fun onFeatureFlagSuccess(showLaughButton : Boolean)
+    fun onFeatureFlagFailure()
   }
 }
