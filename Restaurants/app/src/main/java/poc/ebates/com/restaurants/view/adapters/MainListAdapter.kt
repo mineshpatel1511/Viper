@@ -34,7 +34,7 @@ import com.ebates.restaurants.poc.entity.MainEntity
 
 import kotlinx.android.synthetic.main.card_view_custom_layout.view.*
 
-class MainListAdapter(private var listener: (MainEntity?) -> Unit, private var dataList: List<MainEntity>?) : RecyclerView.Adapter<MainListAdapter.ViewHolder>() {
+class MainListAdapter(private var listener: ((MainEntity?) -> Unit)?, private var dataList: List<MainEntity>?) : RecyclerView.Adapter<MainListAdapter.ViewHolder>() {
 
   // Creating card_view_custom_layout ViewHolder to speed up the performance
   inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -53,7 +53,7 @@ class MainListAdapter(private var listener: (MainEntity?) -> Unit, private var d
   override fun onBindViewHolder(holder: ViewHolder, position: Int) {
     holder.tvId?.text = dataList?.let { it[position].id.toString() }
     holder.tvData?.text = dataList?.let { Html.fromHtml(it[position].text) }
-    holder.itemView?.setOnClickListener { listener(dataList?.get(position)) }
+    holder.itemView?.setOnClickListener { listener?.invoke(dataList?.get(position)) }
   }
 
   fun updateData(list: List<MainEntity>) {

@@ -23,15 +23,21 @@
 package com.ebates.restaurants.poc.view.activities
 
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
+import android.view.View
+import android.widget.ProgressBar
 import android.widget.TextView
 import com.ebates.restaurants.poc.BaseApplication
 import com.ebates.restaurants.poc.DetailContract
 import poc.ebates.com.restaurants.R
 import com.ebates.restaurants.poc.entity.MainEntity
 import com.ebates.restaurants.poc.presenter.DetailPresenter
+import com.ebates.restaurants.poc.view.adapters.MainListAdapter
 import kotlinx.android.synthetic.main.activity_detail.*
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar_view_custom_layout.*
 import org.jetbrains.anko.toast
 import ru.terrakok.cicerone.Navigator
@@ -62,12 +68,16 @@ class DetailActivity : BaseActivity(), DetailContract.View {
   private val toolbar: Toolbar by lazy { toolbar_toolbar_view }
   private val tvId: TextView? by lazy { tv_data_id_activity_detail }
   private val tvData: TextView? by lazy { tv_data_activity_detail }
+    private val recyclerView: RecyclerView by lazy { rv_data_list_activity_detail }
+    private val progressBar: ProgressBar by lazy { prog_bar_loading_data_activity_detail }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_detail)
 
     presenter = DetailPresenter(this)
+      recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+      recyclerView.adapter = MainListAdapter(null, null)
   }
 
   override fun onResume() {
@@ -109,6 +119,20 @@ class DetailActivity : BaseActivity(), DetailContract.View {
   override fun showData(id: String, data: String) {
     tvId?.text = id
     tvData?.text = data
+  }
+
+  override fun showLoading() {
+    recyclerView.isEnabled = false
+    progressBar.visibility = View.VISIBLE
+  }
+
+  override fun hideLoading() {
+    recyclerView.isEnabled = true
+    progressBar.visibility = View.GONE
+  }
+
+  override fun publishDataList(data: List<MainEntity>) {
+    (recyclerView.adapter as MainListAdapter).updateData(data)
   }
 
   override fun showInfoMessage(msg: String) {

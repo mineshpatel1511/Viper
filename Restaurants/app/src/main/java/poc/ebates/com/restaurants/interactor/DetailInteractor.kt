@@ -29,60 +29,24 @@
  *
  */
 
-package com.ebates.restaurants.poc.presenter
+package com.ebates.restaurants.poc.interactor
 
-import com.ebates.restaurants.poc.BaseApplication
 import com.ebates.restaurants.poc.DetailContract
-import com.ebates.restaurants.poc.entity.MainEntity
-import com.ebates.restaurants.poc.interactor.DetailInteractor
+import com.github.kittinunf.fuel.android.core.Json
+import com.github.kittinunf.fuel.android.extension.responseJson
+import com.github.kittinunf.fuel.core.FuelError
+import com.github.kittinunf.fuel.httpPost
 import com.github.kittinunf.result.Result
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import ru.terrakok.cicerone.Router
 
+class DetailInteractor : DetailContract.Interactor {
 
-class DetailPresenter(private var view: DetailContract.View?) : DetailContract.Presenter, DetailContract.InteractorOutput {
-
-  private var interactor: DetailContract.Interactor? = DetailInteractor()
-  private val router: Router? by lazy { BaseApplication.INSTANCE.cicerone.router }
-
-  override fun backButtonClicked() {
-    router?.exit()
+  companion object {
+    val icndbUrl = "https://api.icndb.com/jokes"
   }
 
-  override fun onViewCreated(data: MainEntity) {
-    view?.showData(data.id.toString(), data.text)
-
-    view?.showLoading()
-    interactor?.loadDataList { result ->
-      when (result) {
-        is Result.Failure -> {
-          this.onQueryError()
-        }
-        is Result.Success -> {
-          val dataJsonObject = result.get().obj()
-
-          val type = object : TypeToken<List<MainEntity>>() {}.type
-          val dataList: List<MainEntity> =
-                  Gson().fromJson(dataJsonObject.getJSONArray("value").toString(), type)
-
-          this.onQuerySuccess(dataList)
-        }
-      }
+  override fun loadDataList(interactorOutput: (result: Result<Json, FuelError>) -> Unit) {
+    icndbUrl.httpPost().responseJson { _, _, result ->
+      interactorOutput(result)
     }
-  }
-
-  override fun onDestroy() {
-    view = null
-  }
-
-  override fun onQuerySuccess(data: List<MainEntity>) {
-    view?.hideLoading()
-    view?.publishDataList(data)
-  }
-
-  override fun onQueryError() {
-    view?.hideLoading()
-    view?.showInfoMessage("Error when loading data")
   }
 }
